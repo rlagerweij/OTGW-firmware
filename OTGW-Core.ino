@@ -1142,6 +1142,7 @@ void processOTGW(const char *buf, int len){
   if (isvalidotmsg(buf, len)) { 
     //OT protocol messages are 9 chars long
     if (settingMQTTOTmessage) sendMQTTData("otmessage", buf);
+    Debugf("%s ", buf);
     // source of otmsg
     if (buf[0]=='B')
     {
@@ -1180,7 +1181,7 @@ void processOTGW(const char *buf, int len){
 
     const char *bufval = buf + 1;
     uint32_t value = strtoul(bufval, NULL, 16);
-    // Debugf("msg=[%s] value=[%08x]", bufval, value);
+    // Debugf("value=[%08x]", value);
 
     //split 32bit value into the relevant OT protocol parts
     OTdata.type = (value >> 28) & 0x7;         // byte 1 = take 3 bits that define msg msgType
